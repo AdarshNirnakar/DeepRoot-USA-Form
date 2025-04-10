@@ -1,0 +1,57 @@
+@keyframes scrollText {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scrolling-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  padding: 10px 0;
+  height: 150px;
+}
+
+.scrolling-text-wrapper {
+  display: inline-block;
+  animation: scrollText 40s linear infinite;
+  -webkit-animation: scrollText 40s linear infinite;
+}
+
+.scrolling-header {
+  display: inline;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 96px;
+  line-height: 1.5;
+  letter-spacing: -0.022em;
+  color: white;
+}
+
+.scrolling-container:hover .scrolling-text-wrapper {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .scrolling-header {
+    font-size: 48px;
+  }
+
+  .scrolling-container {
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scrolling-header {
+    font-size: 36px;
+  }
+
+  .scrolling-container {
+    height: 80px;
+  }
+}

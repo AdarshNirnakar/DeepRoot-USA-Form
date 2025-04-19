@@ -1,9 +1,12 @@
+/* Keep the existing keyframes */
 @keyframes scrollText {
   0% {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-50%);
+    /* Adjust based on the number of repetitions and content width */
+    /* If you have 4 repetitions, scrolling -25% moves one full block */
+    transform: translateX(-25%);
   }
 }
 
@@ -12,46 +15,62 @@
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  padding: 10px 0;
-  height: 150px;
+  padding: 10px 0; /* Adjust padding as needed */
+  /* Responsive Height */
+  height: auto; /* Let content determine height */
+  min-height: 80px; /* Minimum height for smaller screens */
 }
 
+/* Ensure the wrapper takes up enough space for the animation */
 .scrolling-text-wrapper {
-  display: inline-block;
+  display: inline-block; /* Changed from inline-block to allow transform */
+  /* Adjust animation duration if needed */
   animation: scrollText 40s linear infinite;
   -webkit-animation: scrollText 40s linear infinite;
+  /* Ensure it doesn't break lines unnaturally */
+  white-space: nowrap;
+  will-change: transform; /* Optimize animation */
 }
 
 .scrolling-header {
-  display: inline;
+  display: inline-block; /* Use inline-block for spacing */
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
-  font-size: 96px;
-  line-height: 1.5;
+  line-height: 1.2; /* Adjust line-height for tighter fit */
   letter-spacing: -0.022em;
   color: white;
+  /* Responsive Font Size using clamp() or media queries */
+  /* Using clamp for fluid typography between sizes */
+  font-size: clamp(36px, 8vw, 96px); /* Min size, preferred size (relative to viewport), max size */
+  padding: 0 0.2em; /* Add some horizontal padding */
+  vertical-align: middle; /* Align text vertically if needed */
 }
 
+/* Pause animation on hover */
 .scrolling-container:hover .scrolling-text-wrapper {
   animation-play-state: paused;
 }
 
-@media (max-width: 768px) {
-  .scrolling-header {
-    font-size: 48px;
-  }
+/* Remove redundant media queries handled by Tailwind or clamp() */
+/* You could add specific overrides here if clamp() isn't sufficient */
 
-  .scrolling-container {
-    height: 100px;
+/* Example: If you needed finer control than clamp() */
+/* @media (max-width: 768px) {
+  .scrolling-header {
+    font-size: 60px;
   }
 }
 
 @media (max-width: 480px) {
   .scrolling-header {
-    font-size: 36px;
+    font-size: 40px;
   }
+} */
 
-  .scrolling-container {
-    height: 80px;
-  }
+/* Ensure container allows content height */
+.container {
+    /* Styles applied via Tailwind */
 }
+
+/* You might need to adjust the animation percentage if the content width changes significantly */
+/* For example, if the text wraps differently, the -50% or -25% might need tweaking */
